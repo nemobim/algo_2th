@@ -21,13 +21,34 @@
 //     return true;
 // };
 
-const isPalindrome = function(x) {
-    // 1. 문자열로 바꾼다: "121"
-    // 2. 배열로 쪼갠다: ["1", "2", "1"]
-    // 3. 순서를 뒤집는다: ["1", "2", "1"]
-    // 4. 다시 합친다: "121"
-    const reversed = x.toString().split('').reverse().join('');
+// const isPalindrome = function(x) {
+//     // 1. 문자열로 바꾼다: "121"
+//     // 2. 배열로 쪼갠다: ["1", "2", "1"]
+//     // 3. 순서를 뒤집는다: ["1", "2", "1"]
+//     // 4. 다시 합친다: "121"
+//     const reversed = x.toString().split('').reverse().join('');
     
-    // 원래 숫자와 뒤집은 문자가 같은지 비교
-    return x.toString() === reversed;
+//     // 원래 숫자와 뒤집은 문자가 같은지 비교
+//     return x.toString() === reversed;
+// };
+
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+    // 1. 음수는 무조건 탈락 (예외 처리)
+    if (x < 0) return false;
+
+    let xCopy = x;
+    let rev = 0;
+
+    while (x > 0) {
+        let rem = x % 10;
+        rev = 10 * rev + rem;
+        x = Math.floor(x / 10);
+    }
+
+    // 2. 원래 복사해둔 값과 뒤집은 값을 비교
+    return rev === xCopy;
 };
